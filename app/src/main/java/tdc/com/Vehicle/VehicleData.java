@@ -63,6 +63,7 @@ public class VehicleData implements Runnable{
         float fValue = getPacket(new int[]{248,249,250,251});
         String lastLap = parseLastLap(fValue);
         activity.setLastLap(lastLap);
+        System.out.println("hi");
     }
 
     private String parseLastLap(float lapTime){
