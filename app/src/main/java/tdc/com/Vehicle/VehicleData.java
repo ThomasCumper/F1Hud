@@ -17,11 +17,13 @@ public class VehicleData implements Runnable{
     boolean run = true;
 
     UdpCapture udp;
+    TimeDelta delta;
     MainActivity activity;
 
     public VehicleData(UdpCapture udp, MainActivity activity) {
         this.udp = udp;
         this.activity = activity;
+        delta = new TimeDelta();
     }
 
     @Override
@@ -29,6 +31,7 @@ public class VehicleData implements Runnable{
 
         while(run){
             updateGear();
+            updateRPM();
             updateLastLap();
         }
     }
@@ -63,7 +66,14 @@ public class VehicleData implements Runnable{
         float fValue = getPacket(new int[]{248,249,250,251});
         String lastLap = parseLastLap(fValue);
         activity.setLastLap(lastLap);
-        System.out.println("hi");
+        float fDelta = delta.getDelta(fValue,getCurrentSector());
+        activity.setDelta(fDelta);
+    }
+
+    private int getCurrentSector(){
+
+        float fValue = getPacket(new int[]{192,193,194,195});
+        return (int) fValue;
     }
 
     private String parseLastLap(float lapTime){
@@ -71,6 +81,13 @@ public class VehicleData implements Runnable{
         long millis = (long) (lapTime *1000);
         SimpleDateFormat formatter = new SimpleDateFormat("m:ss.SSS", Locale.getDefault());
         return formatter.format(new Date(millis));
+    }
+
+    private void updateRPM(){
+
+        float fValue = getPacket(new int[]{148,149,150,151});
+        int RPM = (int) fValue;
+        activity.setRPM(RPM);
     }
 
     private float getPacket(int [] arrayIndex){

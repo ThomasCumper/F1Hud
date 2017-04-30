@@ -51,4 +51,35 @@
         android:layout_alignStart="@+id/txtLastLap"
         android:layout_marginStart="49dp" />
 
+    <TextView
+        android:id="@+id/txtRpmLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:text="RPM"
+        android:layout_below="@+id/txtRPM"
+        android:layout_alignStart="@+id/txtLastLapLabel"
+ />
+
+    <TextView
+        android:id="@+id/txtRPM"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/txtLastLap"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="18dp"
+        android:text="15000"
+        android:textColor="@color/white"
+        android:textSize="60sp" />
+
+    <TextView
+        android:id="@+id/txtDelta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txtGearLabel"
+        android:layout_alignEnd="@+id/txtLastLap"
+        android:text="+0.00"
+        android:textColor="@color/white"
+        android:textSize="40sp" />
+
 </RelativeLayout>

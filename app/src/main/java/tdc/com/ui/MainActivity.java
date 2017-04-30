@@ -39,6 +39,17 @@ public class MainActivity extends AppCompatActivity {
             }});
     }
 
+    public void setRPM(final int rpm){
+        // Update rpm text
+        runOnUiThread(new Runnable(){
+            @Override
+            public void run() {
+                TextView txtRPM = (TextView) findViewById(R.id.txtRPM);
+                txtRPM.setText(String.valueOf(rpm));
+            }});
+
+    }
+
     public void setLastLap(final String lastLap) {
         // Update last lap text
         runOnUiThread(new Runnable(){
@@ -46,6 +57,16 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 TextView txtLastLap = (TextView) findViewById(R.id.txtLastLap);
                 txtLastLap.setText(lastLap);
+            }});
+    }
+
+    public void setDelta(final float delta){
+        runOnUiThread(new Runnable(){
+            @Override
+            public void run() {
+        String d = String.format("%.02f", delta);
+        TextView txtDelta = (TextView) findViewById(R.id.txtDelta);
+        txtDelta.setText(d);
             }});
     }
 
