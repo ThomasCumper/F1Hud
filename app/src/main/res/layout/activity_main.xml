@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    tools:context="tdc.com.ui.MainActivity">
+
+
+    <TextView
+        android:id="@+id/txtGear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="N"
+        android:textColor="@color/white"
+        android:textSize="170sp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/txtGearLabel"
+        android:layout_alignBottom="@+id/txtGear"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gear"
+        android:layout_marginBottom="18dp"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/txtLastLap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="29dp"
+        android:layout_marginEnd="30dp"
+        android:text="0:00:000"
+        android:textColor="@color/white"
+        android:textSize="40sp" />
+
+    <TextView
+        android:id="@+id/txtLastLapLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="13dp"
+        android:textColor="@color/white"
+        android:text="tLastLap"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/txtLastLap"
+        android:layout_marginStart="49dp" />
+
+</RelativeLayout>
