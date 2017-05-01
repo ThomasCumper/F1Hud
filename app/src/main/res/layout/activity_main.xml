@@ -57,20 +57,18 @@
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:text="RPM"
-        android:layout_below="@+id/txtRPM"
-        android:layout_alignStart="@+id/txtLastLapLabel"
- />
+        android:layout_above="@+id/txtGear"
+        android:layout_alignStart="@+id/txtDelta" />
 
     <TextView
         android:id="@+id/txtRPM"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/txtLastLap"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="18dp"
         android:text="15000"
         android:textColor="@color/white"
-        android:textSize="60sp" />
+        android:textSize="60sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignEnd="@+id/txtDelta" />
 
     <TextView
         android:id="@+id/txtDelta"
@@ -81,5 +79,74 @@
         android:text="+0.00"
         android:textColor="@color/white"
         android:textSize="40sp" />
+
+    <TextView
+        android:id="@+id/txtDeltaLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtDelta"
+        android:textColor="@color/white"
+        android:layout_toEndOf="@+id/txtRpmLabel"
+        android:text="tdelta" />
+
+    <ImageView
+        android:id="@+id/ivFlagLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rotation="180"
+        app:srcCompat="@drawable/flag_green"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@+id/txtGear" />
+
+    <ImageView
+        android:id="@+id/ivFlagRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/flag_green"
+        android:layout_alignTop="@+id/ivFlagLeft"
+        android:layout_toEndOf="@+id/txtGear" />
+
+    <ProgressBar
+        android:id="@+id/pbRPM"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="400sp"
+        android:minWidth="50sp"
+        android:progressDrawable="@drawable/progress_drawable"
+        android:layout_marginStart="22dp"
+        android:layout_alignBottom="@+id/txtLastLap"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/txtPbRPMLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:text="RPM"
+        android:layout_below="@+id/pbRPM"
+        android:layout_alignStart="@+id/pbRPM"
+        android:layout_marginStart="10dp" />
+
+    <TextView
+        android:id="@+id/txtLap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="23dp"
+        android:text="10"
+        android:textColor="@color/white"
+        android:textSize="45sp"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/pbRPM" />
+
+    <TextView
+        android:id="@+id/txtLapLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:layout_marginEnd="15dp"
+        android:text="lap"
+        android:layout_below="@+id/txtLap"
+        android:layout_alignEnd="@+id/txtLap" />
 
 </RelativeLayout>

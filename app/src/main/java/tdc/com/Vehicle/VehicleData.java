@@ -20,6 +20,8 @@ public class VehicleData implements Runnable{
     TimeDelta delta;
     MainActivity activity;
 
+    private final float _MAXRPM = 13500;
+
     public VehicleData(UdpCapture udp, MainActivity activity) {
         this.udp = udp;
         this.activity = activity;
@@ -33,6 +35,8 @@ public class VehicleData implements Runnable{
             updateGear();
             updateRPM();
             updateLastLap();
+            updateFlagLights();
+            updateLap();
         }
     }
 
@@ -76,6 +80,13 @@ public class VehicleData implements Runnable{
         return (int) fValue;
     }
 
+    private void updateLap(){
+
+        float fValue = getPacket(new int[]{144,145,146,147});
+        int lap = (int) fValue+1;
+        activity.setLap(lap);
+    }
+
     private String parseLastLap(float lapTime){
 
         long millis = (long) (lapTime *1000);
@@ -87,7 +98,15 @@ public class VehicleData implements Runnable{
 
         float fValue = getPacket(new int[]{148,149,150,151});
         int RPM = (int) fValue;
-        activity.setRPM(RPM);
+        int rpmPercent = (int) ((fValue / _MAXRPM)*100);
+        activity.setRPM(RPM, rpmPercent);
+    }
+
+    public void updateFlagLights(){
+
+        float fValue = getPacket(new int[]{276,277,278,279});
+        int curFlag = (int) fValue;
+        activity.setFlagLights(curFlag);
     }
 
     private float getPacket(int [] arrayIndex){
