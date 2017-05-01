@@ -149,4 +149,47 @@
         android:layout_below="@+id/txtLap"
         android:layout_alignEnd="@+id/txtLap" />
 
+    <TextView
+        android:id="@+id/txtFlTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/txtLap"
+        android:layout_below="@+id/txtGearLabel"
+        android:text="100"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/txtFrTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="100"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:layout_alignBaseline="@+id/txtFlTemp"
+        android:layout_alignBottom="@+id/txtFlTemp"
+        android:layout_toEndOf="@+id/txtLap"
+        android:layout_marginStart="24dp" />
+
+    <TextView
+        android:id="@+id/txtRlTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/txtLastLap"
+        android:layout_alignBottom="@+id/txtLastLap"
+        android:layout_alignStart="@+id/txtFlTemp"
+        android:text="100"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/txtRrTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/txtRlTemp"
+        android:layout_alignStart="@+id/txtFrTemp"
+        android:text="100"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
 </RelativeLayout>

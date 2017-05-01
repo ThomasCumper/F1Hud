@@ -16,7 +16,7 @@ import tdc.com.ui.MainActivity;
 public class VehicleData implements Runnable{
 
     boolean run = true;
-    byte[] data = null;
+    byte[] data = new byte [280];
 
     UdpCapture udp;
     TimeDelta delta;
@@ -36,17 +36,15 @@ public class VehicleData implements Runnable{
     @Override
     public void run() {
 
-        while(run){
+        while(run) {
             getUDPPacket();
             updateGear();
             updateRPM();
             updateLastLap();
             updateFlagLights();
             updateLap();
-            try {
-          //   Thread.sleep(16);
-            }catch(Exception e){}
-            }
+            updateBrakeTemp();
+        }
     }
 
     private void updateGear(){
@@ -123,6 +121,14 @@ public class VehicleData implements Runnable{
         return (int) fValue;
     }
 
+    private void updateBrakeTemp(){
+
+        float [] fValue = getLargePacket(new int[]{204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219});
+        for (int i=0;i<fValue.length;i++)
+                fValue[i]-=273;
+        activity.setBrakeTemp(fValue);
+    }
+
     private void getUDPPacket(){
         data = udp.getUdpData();
     }
@@ -131,5 +137,12 @@ public class VehicleData implements Runnable{
 
         ByteToFloat btf = new ByteToFloat();
         return btf.getFloat(new byte[]{data[arrayIndex[0]],data[arrayIndex[1]],data[arrayIndex[2]],data[arrayIndex[3]]}); // pass 4 bytes to unpack into float
+    }
+
+    private float [] getLargePacket(int [] arrayIndex){
+        ByteToFloat btf = new ByteToFloat();
+        return btf.getMultipleFloat(new byte[]{data[arrayIndex[0]],data[arrayIndex[1]],data[arrayIndex[2]],data[arrayIndex[3]],data[arrayIndex[4]],data[arrayIndex[5]],
+                            data[arrayIndex[6]],data[arrayIndex[7]],data[arrayIndex[8]],data[arrayIndex[9]],data[arrayIndex[10]],data[arrayIndex[11]],
+                            data[arrayIndex[12]],data[arrayIndex[13]],data[arrayIndex[14]],data[arrayIndex[15]],});
     }
 }

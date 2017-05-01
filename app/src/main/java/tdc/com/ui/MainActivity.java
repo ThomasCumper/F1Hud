@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     ProgressBar pbRPM;
     TextView txtLastLap;
     TextView txtLap;
-    TextView txtDelta;
+    TextView txtDelta,txtFlTemp,txtFrTemp,txtRlTemp,txtRrTemp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +39,12 @@ public class MainActivity extends AppCompatActivity {
         txtLastLap = (TextView) findViewById(R.id.txtLastLap);
         txtLap = (TextView) findViewById(R.id.txtLap);
         txtDelta = (TextView)findViewById(R.id.txtDelta);
+        txtFlTemp = (TextView)findViewById(R.id.txtFlTemp);
+        txtFrTemp = (TextView)findViewById(R.id.txtFrTemp);
+        txtRlTemp = (TextView)findViewById(R.id.txtRlTemp);
+        txtRrTemp = (TextView)findViewById(R.id.txtRrTemp);
+
+
 
         try {
             UdpCapture udp = new UdpCapture(Socket.getSocket(20777)); //Create new udp instance passing Datagram socket
@@ -131,6 +137,18 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             });
+    }
+
+    public void setBrakeTemp(final float [] temp){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                txtFlTemp.setText(String.valueOf((int)temp[0]));
+                txtFrTemp.setText(String.valueOf((int)temp[1]));
+                txtRlTemp.setText(String.valueOf((int)temp[2]));
+                txtRrTemp.setText(String.valueOf((int)temp[3]));
+            }
+        });
     }
 
     public void flagLightFlash (final int flash){
