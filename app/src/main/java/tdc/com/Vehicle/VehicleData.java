@@ -6,6 +6,7 @@ import java.util.Locale;
 
 import tdc.com.udp.ByteToFloat;
 import tdc.com.udp.UdpCapture;
+import tdc.com.ui.FlagLightFlash;
 import tdc.com.ui.MainActivity;
 
 /**
@@ -15,6 +16,7 @@ import tdc.com.ui.MainActivity;
 public class VehicleData implements Runnable{
 
     boolean run = true;
+    byte[] data = null;
 
     UdpCapture udp;
     TimeDelta delta;
@@ -26,18 +28,25 @@ public class VehicleData implements Runnable{
         this.udp = udp;
         this.activity = activity;
         delta = new TimeDelta();
+        FlagLightFlash flf = new FlagLightFlash(activity,this);
+        Thread t1 = new Thread(flf);
+        t1.start();
     }
 
     @Override
     public void run() {
 
         while(run){
+            getUDPPacket();
             updateGear();
             updateRPM();
             updateLastLap();
             updateFlagLights();
             updateLap();
-        }
+            try {
+          //   Thread.sleep(16);
+            }catch(Exception e){}
+            }
     }
 
     private void updateGear(){
@@ -105,14 +114,22 @@ public class VehicleData implements Runnable{
     public void updateFlagLights(){
 
         float fValue = getPacket(new int[]{276,277,278,279});
-        int curFlag = (int) fValue;
+        int curFlag = getCurrentFlag();
         activity.setFlagLights(curFlag);
+    }
+
+    public int getCurrentFlag(){
+        float fValue = getPacket(new int[]{276,277,278,279});
+        return (int) fValue;
+    }
+
+    private void getUDPPacket(){
+        data = udp.getUdpData();
     }
 
     private float getPacket(int [] arrayIndex){
 
         ByteToFloat btf = new ByteToFloat();
-        byte [] b = udp.getUdpData(); // get byte array from udp packet
-        return btf.getFloat(new byte[]{b[arrayIndex[0]],b[arrayIndex[1]],b[arrayIndex[2]],b[arrayIndex[3]]}); // pass 4 bytes to unpack into float
+        return btf.getFloat(new byte[]{data[arrayIndex[0]],data[arrayIndex[1]],data[arrayIndex[2]],data[arrayIndex[3]]}); // pass 4 bytes to unpack into float
     }
 }

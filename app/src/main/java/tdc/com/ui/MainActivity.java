@@ -17,12 +17,28 @@ import static android.graphics.Color.rgb;
 
 public class MainActivity extends AppCompatActivity {
 
+    ImageView ivFlagLeft;
+    ImageView ivFlagRight;
+    TextView txtRPM;
+    ProgressBar pbRPM;
+    TextView txtLastLap;
+    TextView txtLap;
+    TextView txtDelta;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setScreenStyle(getWindow().getDecorView()); // pass current view
+
+        ivFlagLeft = (ImageView)findViewById(R.id.ivFlagLeft);
+        ivFlagRight = (ImageView)findViewById(R.id.ivFlagRight);
+        txtRPM = (TextView) findViewById(R.id.txtRPM);
+        pbRPM = (ProgressBar) findViewById(R.id.pbRPM);
+        txtLastLap = (TextView) findViewById(R.id.txtLastLap);
+        txtLap = (TextView) findViewById(R.id.txtLap);
+        txtDelta = (TextView)findViewById(R.id.txtDelta);
 
         try {
             UdpCapture udp = new UdpCapture(Socket.getSocket(20777)); //Create new udp instance passing Datagram socket
@@ -48,8 +64,6 @@ public class MainActivity extends AppCompatActivity {
         runOnUiThread(new Runnable(){
             @Override
             public void run() {
-                TextView txtRPM = (TextView) findViewById(R.id.txtRPM);
-                ProgressBar pbRPM = (ProgressBar) findViewById(R.id.pbRPM);
                 txtRPM.setText(String.valueOf(rpm));
                 pbRPM.setProgress(rpmPercent);
             }});
@@ -61,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
         runOnUiThread(new Runnable(){
             @Override
             public void run() {
-                TextView txtLastLap = (TextView) findViewById(R.id.txtLastLap);
                 txtLastLap.setText(lastLap);
             }});
     }
@@ -71,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
         runOnUiThread(new Runnable(){
             @Override
             public void run() {
-                TextView txtLap = (TextView) findViewById(R.id.txtLap);
                 txtLap.setText(String.valueOf(lap));
             }
         });
@@ -83,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
         runOnUiThread(new Runnable(){
             @Override
             public void run() {
-        TextView txtDelta = (TextView)findViewById(R.id.txtDelta);
         String sDelta = String.format("%.02f", delta);
         if (delta >0){
             txtDelta.setText("+"+sDelta);
@@ -96,9 +107,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setFlagLights(final int curFlag){
-
-        final ImageView ivFlagLeft = (ImageView) findViewById(R.id.ivFlagLeft);
-        final ImageView ivFlagRight = (ImageView) findViewById(R.id.ivFlagRight);
 
         runOnUiThread(new Runnable(){
             @Override
@@ -123,6 +131,24 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             });
+    }
+
+    public void flagLightFlash (final int flash){
+
+        runOnUiThread(new Runnable(){
+            @Override
+            public void run() {
+
+                if (flash == 1) {
+                    ivFlagLeft.setVisibility(View.VISIBLE);
+                    ivFlagRight.setVisibility(View.VISIBLE);
+                } else {
+                    ivFlagLeft.setVisibility(View.INVISIBLE);
+                    ivFlagRight.setVisibility(View.INVISIBLE);
+                }
+            }
+            });
+
     }
 
     private void setScreenStyle(View decorView){
