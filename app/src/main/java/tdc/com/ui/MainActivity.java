@@ -17,13 +17,17 @@ import static android.graphics.Color.rgb;
 
 public class MainActivity extends AppCompatActivity {
 
-    ImageView ivFlagLeft;
-    ImageView ivFlagRight;
-    TextView txtRPM;
-    ProgressBar pbRPM;
-    TextView txtLastLap;
-    TextView txtLap;
-    TextView txtDelta,txtFlTemp,txtFrTemp,txtRlTemp,txtRrTemp;
+    ImageView ivFlagLeft= (ImageView)findViewById(R.id.ivFlagLeft); ;
+    ImageView ivFlagRight = (ImageView)findViewById(R.id.ivFlagRight);
+    TextView txtRPM = (TextView) findViewById(R.id.txtRPM);
+    ProgressBar pbRPM = (ProgressBar) findViewById(R.id.pbRPM);;
+    TextView txtLastLap  = (TextView) findViewById(R.id.txtLastLap);
+    TextView txtLap = (TextView) findViewById(R.id.txtLap);
+    TextView txtDelta = (TextView)findViewById(R.id.txtDelta);
+    TextView txtFlTemp = (TextView)findViewById(R.id.txtFlTemp);
+    TextView txtFrTemp = (TextView)findViewById(R.id.txtFrTemp);
+    TextView txtRlTemp = (TextView)findViewById(R.id.txtRlTemp);
+    TextView txtRrTemp = (TextView)findViewById(R.id.txtRrTemp);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,20 +35,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setScreenStyle(getWindow().getDecorView()); // pass current view
-
-        ivFlagLeft = (ImageView)findViewById(R.id.ivFlagLeft);
-        ivFlagRight = (ImageView)findViewById(R.id.ivFlagRight);
-        txtRPM = (TextView) findViewById(R.id.txtRPM);
-        pbRPM = (ProgressBar) findViewById(R.id.pbRPM);
-        txtLastLap = (TextView) findViewById(R.id.txtLastLap);
-        txtLap = (TextView) findViewById(R.id.txtLap);
-        txtDelta = (TextView)findViewById(R.id.txtDelta);
-        txtFlTemp = (TextView)findViewById(R.id.txtFlTemp);
-        txtFrTemp = (TextView)findViewById(R.id.txtFrTemp);
-        txtRlTemp = (TextView)findViewById(R.id.txtRlTemp);
-        txtRrTemp = (TextView)findViewById(R.id.txtRrTemp);
-
-
 
         try {
             UdpCapture udp = new UdpCapture(Socket.getSocket(20777)); //Create new udp instance passing Datagram socket

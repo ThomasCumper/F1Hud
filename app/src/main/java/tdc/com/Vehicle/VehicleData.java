@@ -10,7 +10,7 @@ import tdc.com.ui.FlagLightFlash;
 import tdc.com.ui.MainActivity;
 
 /**
- * Created by Tomm1eGun2 on 30/04/2017.
+ * Created by Tom Cumper on 30/04/2017.
  */
 
 public class VehicleData implements Runnable{
@@ -140,6 +140,7 @@ public class VehicleData implements Runnable{
     }
 
     private float [] getLargePacket(int [] arrayIndex){
+
         ByteToFloat btf = new ByteToFloat();
         return btf.getMultipleFloat(new byte[]{data[arrayIndex[0]],data[arrayIndex[1]],data[arrayIndex[2]],data[arrayIndex[3]],data[arrayIndex[4]],data[arrayIndex[5]],
                             data[arrayIndex[6]],data[arrayIndex[7]],data[arrayIndex[8]],data[arrayIndex[9]],data[arrayIndex[10]],data[arrayIndex[11]],
